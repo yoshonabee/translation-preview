@@ -7,9 +7,9 @@
 - **Configuration Options**:
 
   - `translationPreview.languages`: Specify the list of language codes for which translations should be previewed. Default is `["en"]`.
-  - `translationPreview.potPath`: Define the path to the `.pot` file containing translation keys. Default is `./locales/messages.pot`.
-  - `translationPreview.poPath`: Define the path to the `.po` files containing translations, using `{lang}` as a placeholder for the language code. Default is `./locales/{lang}/LC_MESSAGES/messages.po`.
-  - `translationPreview.translateFunctions`: List of translation function names to recognize in the code. Default is `["_", "t", "i18n"]`.
+  - `translationPreview.potPaths`: Define the list of paths to the `.pot` files containing translation keys. Default is `["./locale/messages.pot"]`.
+  - `translationPreview.poPaths`: Define the list of paths to the `.po` files containing translations, using `{lang}` as a placeholder for the language code. Default is `["./locale/{lang}/LC_MESSAGES/messages.po"]`.
+  - `translationPreview.translateFunctions`: List of translation function names to recognize in the code. Default is `["_", "t", "gettext", "i18n"]`.
 - **Hover Provider**: Displays translation keys and their corresponding translations in different languages when hovering over recognized translation functions in the code.
 - **Automatic Reload**: Automatically reloads translations when the configuration changes.
 
