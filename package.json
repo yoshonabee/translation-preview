@@ -2,7 +2,8 @@
   "name": "translation-preview",
   "displayName": "Translation Preview",
   "description": "Preview translations for .pot and .po files",
-  "version": "0.0.1",
+  "repository": "https://github.com/yoshonabee/translation-preview",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.60.0"
   },
