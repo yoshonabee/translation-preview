@@ -3,7 +3,7 @@
   "displayName": "Translation Preview",
   "description": "Preview translations for .pot and .po files",
   "repository": "https://github.com/yoshonabee/translation-preview",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -28,23 +28,29 @@
           "default": ["en"],
           "description": "List of language codes for preview translations"
         },
-        "translationPreview.potPath": {
-          "type": "string",
-          "default": "./locales/messages.pot",
-          "description": "Path to the .pot file containing translation keys"
-        },
-        "translationPreview.poPath": {
-          "type": "string",
-          "default": "./locales/{lang}/LC_MESSAGES/messages.po",
-          "description": "Path to the .po files containing translations. Use {lang} as a placeholder for the language code."
-        },
         "translationPreview.translateFunctions": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": ["_", "t", "i18n"],
+          "default": ["_", "t", "gettext", "i18n"],
           "description": "List of translation function names to recognize"
+        },
+        "translationPreview.potPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": ["./locale/messages.pot"],
+          "description": "List of paths to .pot files containing translation keys"
+        },
+        "translationPreview.poPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": ["./locale/{lang}/LC_MESSAGES/messages.po"],
+          "description": "List of paths to .po files containing translations. Use {lang} as a placeholder for the language code."
         }
       }
     }

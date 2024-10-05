@@ -15,17 +15,27 @@ export class TranslationProvider implements vscode.HoverProvider {
   private loadTranslations() {
     const config = vscode.workspace.getConfiguration('translationPreview');
     const languages = config.get<string[]>('languages', ['en']);
-    const potPath = config.get<string>('potPath', './locales/messages.pot');
-    const poPath = config.get<string>('poPath', './locales/{lang}/LC_MESSAGES/messages.po');
+    const potPaths = config.get<string[]>('potPaths', ['./locales/messages.pot']);
+    const poPaths = config.get<string[]>('poPaths', ['./locales/{lang}/LC_MESSAGES/messages.po']);
     this.translateFunctions = config.get<string[]>('translateFunctions', ['_', 't']);
 
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
     if (workspaceFolder) {
-      this.potTranslations = parsePoFile(path.join(workspaceFolder, potPath));
-      
+      this.potTranslations = [];
+      potPaths.forEach(potPath => {
+        this.potTranslations.push(...parsePoFile(path.join(workspaceFolder, potPath)));
+      });
+
+      this.poTranslations.clear();
       languages.forEach(lang => {
-        const langPoPath = poPath.replace('{lang}', lang);
-        this.poTranslations.set(lang, parsePoFile(path.join(workspaceFolder, langPoPath)));
+        poPaths.forEach(poPath => {
+          const langPoPath = poPath.replace('{lang}', lang);
+          const translations = parsePoFile(path.join(workspaceFolder, langPoPath));
+          if (!this.poTranslations.has(lang)) {
+            this.poTranslations.set(lang, []);
+          }
+          this.poTranslations.get(lang)?.push(...translations);
+        });
       });
     }
   }
